@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SplashScreenWithLogin</string>
+    <string name="register_button">Don\'t have an account</string>
+</resources>
