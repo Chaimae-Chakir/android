@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">contactsApp</string>
+    <string name="add_contact_fab_description">Add new contact</string>
+    <string name="delete_contact_fab_description">delete a contact</string><string name="contact_image_description">Contact Image</string>
+    <string name="contact_details_button_text">Details</string>
+    <string name="edit_contact">Edit </string>
+    <string name="delete_contact">Delete </string>
+</resources>
