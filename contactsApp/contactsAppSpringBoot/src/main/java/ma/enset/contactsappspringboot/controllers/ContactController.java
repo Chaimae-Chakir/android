@@ -22,7 +22,7 @@ public class ContactController {
     }
 
     @GetMapping("/{id}")
-    public Contact getContactById(@PathVariable Long id) {
+    public Contact getContactById(@PathVariable int id) {
         return contactRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found with id " + id));
     }
@@ -33,7 +33,7 @@ public class ContactController {
     }
 
     @PutMapping("/{id}")
-    public Contact updateContact(@PathVariable("id") Long id, @RequestBody Contact contact) {
+    public Contact updateContact(@PathVariable("id") int id, @RequestBody Contact contact) {
         Contact Updatedcontact = contactRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found with id " + id));
 
@@ -46,7 +46,7 @@ public class ContactController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteContact(@PathVariable Long id) {
+    public ResponseEntity<?> deleteContact(@PathVariable int id) {
         Contact contact = contactRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Contact not found with id " + id));
 
