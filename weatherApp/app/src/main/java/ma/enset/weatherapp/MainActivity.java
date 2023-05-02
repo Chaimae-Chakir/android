@@ -39,16 +39,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
 
     TextView ville;
     TextView tmp;
     TextView tmpmin;
     TextView tmpmax;
+
     TextView txtpression;
     TextView txthumidite;
     TextView txtdate;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         txthumidite=findViewById(R.id.humid);
         txtdate=findViewById(R.id.date);
 
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -94,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
                 String url="http://api.openweathermap.org/data/2.5/weather?q="
                         +query+"&appid=e457293228d5e1465f30bcbe1aea456b";
                 //https://api.openweathermap.org/data/2.5/weather?q=London&appid=e457293228d5e1465f30bcbe1aea456b
+
+                // l'ancienne clé : 5bd7e048cf1ef62c79254f75dfe27d19
+                // la clé actuelle: e457293228d5e1465f30bcbe1aea456b
+                //clé 2022 : e457293228d5e1465f30bcbe1aea456b
+
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
 
@@ -200,12 +205,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }
