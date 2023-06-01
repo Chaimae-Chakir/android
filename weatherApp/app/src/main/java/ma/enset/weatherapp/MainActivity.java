@@ -1,7 +1,5 @@
 package ma.enset.weatherapp;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -10,134 +8,148 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.StrictMode;
-import android.util.Log;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import ma.enset.weatherapp.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.widget.Toolbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
-
-    TextView ville;
-    TextView tmp;
-    TextView tmpmin;
-    TextView tmpmax;
-
-    TextView txtpression;
-    TextView txthumidite;
-    TextView txtdate;
-
+public class MainActivity  extends AppCompatActivity implements OnMapReadyCallback {
+    private GoogleMap mMap;
+    private Marker marker;
+    EditText editText;
+    Button button;
+    ImageView imageView;
+    TextView temptv, time, longitude, latitude, humidity, pressure, country, city_nam, max_temp, min_temp;
+    double let_at,let_log;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ImageView imgview=findViewById(R.id.img);
-        imgview.setImageResource(R.drawable.weather);
 
-        if (android.os.Build.VERSION.SDK_INT > 9)
-        {
-            StrictMode.ThreadPolicy policy = new
-                    StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
+        editText = findViewById(R.id.editTextTextPersonName);
+        button = findViewById(R.id.button);
+        imageView = findViewById(R.id.imageView);
+        temptv = findViewById(R.id.textView3);
+        time = findViewById(R.id.textView2);
+
+        longitude = findViewById(R.id.longitude);
+        latitude = findViewById(R.id.latitude);
+        humidity = findViewById(R.id.humidity);
+        pressure = findViewById(R.id.pressure);
+        country = findViewById(R.id.country);
+        city_nam = findViewById(R.id.city_nam);
+        max_temp = findViewById(R.id.temp_max);
+        min_temp = findViewById(R.id.min_temp);
+
+
+        button.setOnClickListener(new View.OnClickListener()
+                                  {
+                                      @Override
+                                      public void onClick(View v)
+
+                                      {
+
+                                          FindWeather();
+                                          SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                                                  .findFragmentById(R.id.map);
+                                          mapFragment.getMapAsync(MainActivity.this);
+                                      }
+                                  }
+        );
 
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        final Context co = this;
-
-        ville=findViewById(R.id.city);
-        tmp=findViewById(R.id.temp);
-        tmpmin=findViewById(R.id.tempmin);
-        tmpmax=findViewById(R.id.tempmax);
-        txtpression=findViewById(R.id.pressure);
-        txthumidite=findViewById(R.id.humid);
-        txtdate=findViewById(R.id.date);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                ville.setText(query);
-                RequestQueue queue= Volley.newRequestQueue(getApplicationContext());
-                String url="http://api.openweathermap.org/data/2.5/weather?q="
-                        +query+"&appid=e457293228d5e1465f30bcbe1aea456b";
-                //https://api.openweathermap.org/data/2.5/weather?q=London&appid=e457293228d5e1465f30bcbe1aea456b
-
-                // l'ancienne clé : 5bd7e048cf1ef62c79254f75dfe27d19
-                // la clé actuelle: e457293228d5e1465f30bcbe1aea456b
-                //clé 2022 : e457293228d5e1465f30bcbe1aea456b
-
-
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-
+    public void FindWeather()
+    {
+        final String city = editText.getText().toString();
+        String url ="http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=462f445106adc1d21494341838c10019&units=metric";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,url,
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
-                            Log.i("MyLog","----------------------------------------------");
-                            Log.i("MyLog",response);
+                            //find temperature
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONObject object = jsonObject.getJSONObject("main");
+                            double temp = object.getDouble("temp");
+                            temptv.setText("Temperature\n"+temp+"°C");
 
-                            JSONObject jsonObject=new JSONObject(response);
+                            //find country
+                            JSONObject object8 = jsonObject.getJSONObject("sys");
+                            String count = object8.getString("country");
+                            country.setText(count+"  :");
 
-                            Date date=new Date(jsonObject.getLong("" +
-                                    "")*1000);
-                            SimpleDateFormat simpleDateFormat=
-                                    new SimpleDateFormat("dd-MMM-yyyy' T 'HH:mm");
-                            String dateString=simpleDateFormat.format(date);
+                            //find city
+                            String city = jsonObject.getString("name");
+                            city_nam.setText(city);
 
-                            JSONObject main=jsonObject.getJSONObject("main");
-                            int Temp=(int)(main.getDouble("temp")-273.15);
-                            int TempMin=(int)(main.getDouble("temp_min")-273.15);
-                            int TempMax=(int)(main.getDouble("temp_max")-273.15);
-                            int Pression=(int)(main.getDouble("pressure"));
-                            int Humidite=(int)(main.getDouble("humidity"));
+                            //find icon
+                            JSONArray jsonArray = jsonObject.getJSONArray("weather");
+                            JSONObject obj = jsonArray.getJSONObject(0);
+                            String icon = obj.getString("icon");
+                            Picasso.get().load("http://openweathermap.org/img/wn/"+icon+"@2x.png").into(imageView);
 
-                            JSONArray weather=jsonObject.getJSONArray("weather");
-                            String meteo=weather.getJSONObject(0).getString("main");
+                            //find date & time
+                            Calendar calendar = Calendar.getInstance();
+                            SimpleDateFormat std = new SimpleDateFormat("HH:mm a \nE, MMM dd yyyy");
+                            String date = std.format(calendar.getTime());
+                            time.setText(date);
 
-                            txtdate.setText(dateString);
-                            tmp.setText(String.valueOf(Temp+"°C"));
-                            tmpmin.setText(String.valueOf(TempMin)+"°C");
-                            tmpmax.setText(String.valueOf(TempMax)+"°C");
-                            txtpression.setText(String.valueOf(Pression+" hPa"));
-                            txthumidite.setText(String.valueOf(Humidite)+ "%");
+                            //find latitude
+                            JSONObject object2 = jsonObject.getJSONObject("coord");
+                            double lat_find = object2.getDouble("lat");
+                            let_at=lat_find;
+                            latitude.setText(lat_find+"°  N");
 
-                            Log.i("Weather","----------------------------------------------");
-                            Log.i("Meteo",meteo);
-                            setImage(meteo);
-                            Toast.makeText(co,meteo, Toast.LENGTH_LONG).show();
-                            //Toast.makeText(getApplicationContext( ), response, Toast.LENGTH_LONG).show( );
+                            //find longitude
+                            JSONObject object3 = jsonObject.getJSONObject("coord");
+                            double long_find = object3.getDouble("lon");
+                            let_log=long_find;
+                            longitude.setText(long_find+"°  E");
+
+                            //find humidity
+                            JSONObject object4 = jsonObject.getJSONObject("main");
+                            int humidity_find = object4.getInt("humidity");
+                            humidity.setText(humidity_find+"  %");
+
+                            //find pressure
+                            JSONObject object7 = jsonObject.getJSONObject("main");
+                            String pressure_find = object7.getString("pressure");
+                            pressure.setText(pressure_find+"  hPa");
+
+                            //find min temperature
+                            JSONObject object10 = jsonObject.getJSONObject("main");
+                            double mintemp = object10.getDouble("temp_min");
+                            min_temp.setText("Min Temp\n"+mintemp+" °C");
+
+                            //find max temperature
+                            JSONObject object12 = jsonObject.getJSONObject("main");
+                            double maxtemp = object12.getDouble("temp_max");
+                            max_temp.setText("Max Temp\n"+maxtemp+" °C");
+
 
 
                         } catch (JSONException e) {
@@ -145,65 +157,56 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                     }
-                },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error)
-                            {
-                                Log.i("MyLog","-------Connection problem-------------------");
-                                Toast.makeText(MainActivity.this,
-                                        "City not fond",Toast.LENGTH_LONG).show();
-
-
-                            }
-                        });
-
-                queue.add(stringRequest);
-
-
-
-                return false;
-            }
-
+                }, new Response.ErrorListener() {
             @Override
-            public boolean onQueryTextChange(String newText) {
-
-
-                return false;
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this,error.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 
-        return true;
-    }
-
-    public void setImage(String s)
-    {
-        ImageView imgview=findViewById(R.id.img);
-        if(s.equals("Rain")) {
-            imgview.setImageResource(R.drawable.rainy);
-        }
-        else if(s.equals("Clear")){
-            imgview.setImageResource(R.drawable.clear);}
-        else if(s.equals("Thunderstorm")) {
-            imgview.setImageResource(R.drawable.thunderstorm);}
-        else if(s.equals("Clouds"))
-        {
-            imgview.setImageResource(R.drawable.cloudy);
-        }
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        requestQueue.add(stringRequest);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onMapReady(@NonNull final GoogleMap googleMap) {
+        final String city = editText.getText().toString();
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=462f445106adc1d21494341838c10019&units=metric";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            // Trouver la température
+                            JSONObject jsonObject = new JSONObject(response);
+                            // Trouver la latitude
+                            JSONObject object2 = jsonObject.getJSONObject("coord");
+                            double lat_find = object2.getDouble("lat");
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                            // Trouver la longitude
+                            JSONObject object3 = jsonObject.getJSONObject("coord");
+                            double long_find = object3.getDouble("lon");
+                            mMap = googleMap;
+                            if (marker != null && marker.isVisible()) {
+                                marker.remove();
+                            }
+                            // Ajouter un marqueur à la ville et déplacer la caméra
+                            LatLng cityLatLng = new LatLng(lat_find, long_find);
+                            marker = mMap.addMarker(new MarkerOptions().position(cityLatLng).title("Je suis à " + city));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(cityLatLng));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
         }
-
-        return super.onOptionsItemSelected(item);
+        );
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+        requestQueue.add(stringRequest);
     }
 }
