@@ -1,0 +1,75 @@
+[
+  {
+    "id" : 1,
+    "name" : "Chaimae chakir",
+    "phone_profile": "0630020377",
+    "email" : "chaimaechakir@gmail.com",
+    "profession": "Software enginner",
+    "image" : "image1"
+  },
+  {
+    "id": 2,
+    "name": "Ahmed Moussaoui",
+    "phone_profile": "0654321098",
+    "email": "ahmed.moussaoui@gmail.com",
+    "profession": "Project Manager",
+    "image": "image2"
+  },
+  {
+    "id": 3,
+    "name": "Karim Belhaj",
+    "phone_profile": "0667891234",
+    "email": "karim.belhaj@gmail.com",
+    "profession": "Mobile Engineer",
+    "image": "image3"
+  },
+  {
+    "id": 4,
+    "name": "Nadia El Amrani",
+    "phone_profile": "0698765432",
+    "email": "nadia.elamrani@gmail.com",
+    "profession": "Sales Engineer",
+    "image": "image4"
+  },
+  {
+    "id": 5,
+    "name": "Ahmed Bensaïd",
+    "phone_profile": "0612345678",
+    "email": "ahmed.bensaid@gmail.com",
+    "profession": "DevOps Engineer",
+    "image": "image5"
+  },
+  {
+    "id": 6,
+    "name": "Yasmine Moussaoui",
+    "phone_profile": "0623456789",
+    "email": "yasmine.moussaoui@gmail.com",
+    "profession": "System Architect",
+    "image": "image6"
+  },
+  {
+    "id": 7,
+    "name": "Saad El Kheir",
+    "phone_profile": "0734567890",
+    "email": "saad.elkheir@gmail.com",
+    "profession": "Professor",
+    "image": "image7"
+  },
+  {
+    "id": 8,
+    "name": "Omar El Haddad",
+    "phone_profile": "0765432109",
+    "email": "omar.elhaddad@gmail.com",
+    "profession": "Software Engineer",
+    "image": "image8"
+  },
+  {
+    "id": 9,
+    "name": "Samira Moughit",
+    "phone_profile": "0623456789",
+    "email": "samira.moughit@gmail.com",
+    "profession": "Cook",
+    "image": "image9"
+  }
+]
+
