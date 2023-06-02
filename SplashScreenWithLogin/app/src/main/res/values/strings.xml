@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">SplashScreenWithLogin</string>
-    <string name="register_button">Don\'t have an account</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="wlem_back">Welcome Back</string>
+    <string name="sign_in_">Sign in to continue</string>
+    <string name="mail">Email</string>
+    <string name="pwd">Password</string>
+    <string name="log">Login</string>
+    <string name="password_forgotten">Forgot Password?</string>
+    <string name="emaill" translatable="false">Email:</string>
+    <string name="passwordd">Password:</string>
+    <string name="welcome_backk">Welcome Back</string>
+    <string name="sign_in_to_continuee">Sign in to continue</string>
+    <string name="emailll">Email</string>
+    <string name="passworddd">Password</string>
+    <string name="loginnn">Login</string>
+    <string name="forgot_passwordd">Forgot Password?</string>
+    <string name="user_account_information">User account information</string>
+    <string name="register_button">Don\'\'t have an account</string>
+    <string name="name">name</string>
 </resources>

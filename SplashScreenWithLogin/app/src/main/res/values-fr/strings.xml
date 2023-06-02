@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SplashScreenWithLogin</string>
+    <string name="welcome_back">Bienvenue</string>
+    <string name="sign_in_to_continue">se connecter pour continuer</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">se connecter</string>
+    <string name="forgot_password">Mot de passe oublié?</string>
+    <string name="wlem_back">Bienvenue</string>
+    <string name="sign_in_">se connecter pour continuer</string>
+    <string name="mail">Email</string>
+    <string name="pwd">Mot de passe</string>
+    <string name="log">se connecter</string>
+    <string name="password_forgotten">Mot de passe oublié?</string>
+    <string name="passwordd">Mot de passe:</string>
+    <string name="welcome_backk">Bienvenue</string>
+    <string name="sign_in_to_continuee">se connecter pour continuer</string>
+    <string name="emailll">Email</string>
+    <string name="passworddd">Mot de passe</string>
+    <string name="loginnn">se connecter</string>
+    <string name="forgot_passwordd">Mot de passe oublié?</string>
+    <string name="user_account_information">Les informations du compte de l\'utilisateur</string>
+    <string name="register_button">Vous n\’avez pas de compte</string>
+    <string name="name">le nom:</string>
+</resources>

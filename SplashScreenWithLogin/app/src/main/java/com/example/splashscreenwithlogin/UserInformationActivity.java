@@ -1,15 +1,17 @@
 package com.example.splashscreenwithlogin;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.splashscreenwithlogin.Activity_Splash_Login;
+import com.example.splashscreenwithlogin.R;
 
 public class UserInformationActivity extends AppCompatActivity {
-
     private TextView emailTextView;
     private TextView passwordTextView;
     private Button backButton;
@@ -24,28 +26,26 @@ public class UserInformationActivity extends AppCompatActivity {
         backButton = findViewById(R.id.back_button);
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("email") && intent.hasExtra("password")) {
+        if (intent != null) {
             String email = intent.getStringExtra("email");
-            int index = email.indexOf("@");
-            if (index != -1) {
-                String nom = email.substring(0, index);
-                String password = intent.getStringExtra("password");
-
-                String n = "Nom de l'utilisateur est " + nom;
-                String p = "Mot de passe est " + password;
-
-                emailTextView.setText(n);
-                passwordTextView.setText(p);
+            String nom = "";
+            if (email != null && email.contains("@")) {
+                int index = email.indexOf("@");
+                nom = email.substring(0, index);
             }
-        }
+            String password = intent.getStringExtra("password");
 
+            String n = "Nom de l'utilisateur est " + nom;
+            String p = "Mot de passe est " + password;
+
+            emailTextView.setText(n);
+            passwordTextView.setText(p);
+        }
 
         backButton.setOnClickListener(v -> {
-                Intent intent1 = new Intent(UserInformationActivity.this, Activity_Splash_Login.class);
-                startActivity(intent1);
-                finish();
-            });
-        }
+            Intent intent1 = new Intent(UserInformationActivity.this, Activity_Splash_Login.class);
+            startActivity(intent1);
+            finish();
+        });
     }
-
-
+}

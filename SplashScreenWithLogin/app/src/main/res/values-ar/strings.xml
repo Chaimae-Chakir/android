@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SplashScreenWithLogin</string>
+    <string name="welcome_back">مرحباً بك </string>
+    <string name="sign_in_to_continue">تسجيل الدخول للمتابعة</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="password">كلمه سر</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="forgot_password">نسيت كلمة المرور؟</string>
+    <string name="wlem_back">مرحباً بك</string>
+    <string name="sign_in_">تسجيل الدخول للمتابعة</string>
+    <string name="mail">البريد الإلكتروني</string>
+    <string name="pwd">كلمه سر</string>
+    <string name="log">تسجيل الدخول</string>
+    <string name="password_forgotten">نسيت كلمة المرور؟</string>
+    <string name="passwordd">كلمه سر:</string>
+    <string name="welcome_backk">مرحباً بك</string>
+    <string name="sign_in_to_continuee">تسجيل الدخول للمتابعة</string>
+    <string name="emailll">البريد الإلكتروني</string>
+    <string name="passworddd">كلمه سر</string>
+    <string name="loginnn">تسجيل الدخول</string>
+    <string name="forgot_passwordd">نسيت كلمة المرور؟</string>
+    <string name="user_account_information">معلومات حساب المستخدم</string>
+    <string name="register_button">ليس لديك حساب</string>
+    <string name="name">اسم المستخدم:</string>
+</resources>

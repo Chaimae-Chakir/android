@@ -16,21 +16,21 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="350dp"
             android:fontFamily="cursive"
+            android:gravity="center"
             android:text="Les informations du compte de l'utilisateur "
             android:textColor="#000000"
-            android:textSize="20dp"/>
-
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/email_text_view"
-            android:layout_marginStart="50dp"
-            android:textSize="20dp"
-            android:textColor="#000000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginStart="50dp"
             android:fontFamily="cursive"
-            android:text="Email: " />
+            android:gravity="center"
+            android:text="Email: "
+            android:textColor="#000000"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/password_text_view"
@@ -46,12 +46,13 @@
 
         <Button
             android:id="@+id/back_button"
-
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:background="@drawable/back_button" />
+            android:text="back"
+            android:background="@drawable/back_button"
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

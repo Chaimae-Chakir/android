@@ -33,7 +33,7 @@ public class Activity_Splash_Login extends AppCompatActivity {
                 // Vérifier si l'email et le mot de passe sont valides, par exemple en utilisant un Regex
                 // Si les données sont valides, ouvrir une nouvelle activité et passer les données d'utilisateur en tant qu'arguments
                 if (isValidEmail(email) && isValidPassword(password)) {
-                    Intent intent = new Intent(Activity_Splash_Login.this, UserInformationActivity.class);
+                    Intent intent = new Intent(Activity_Splash_Login.this, com.example.splashscreenwithlogin.UserInformationActivity.class);
                     intent.putExtra("email", email);
                     intent.putExtra("password", password);
                     startActivity(intent);
