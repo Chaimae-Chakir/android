@@ -95,19 +95,5 @@
   </tr>
 </table>
 
-# Contribuer au projet
 
-<p style="justify">Les contributions sont ce qui fait de la communauté open source un excellent lieu d'apprentissage, d'inspiration et de création. </p>
-Nous apprécions beaucoup votre contribution
-
-1. Cloner le projet.
-2. Créer votre branche  appler MiseAjour  ( ` git chekout -b miseAjour/creaive ` ).
-3. Importer vos modifications a votre branche ( `git commit -m 'add same news'` ).
-4. Ajouter à la branche initiale ( `git push origin miseAjour/creaive ` ).
-5. Ouvrir Pull Request.
-
-
-# License
-
-[MIT](https://choosealicense.com/licenses/mit/)
 
