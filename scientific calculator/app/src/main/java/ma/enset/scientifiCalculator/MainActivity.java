@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.mariuszgromada.math.mxparser.Expression;
 
-import ma.enset.scientifiCalculator.R;
 
 
 public class MainActivity extends AppCompatActivity {
